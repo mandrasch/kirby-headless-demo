@@ -20,7 +20,8 @@ jobs:
     defaults:
       run:
         # switch directory always to backend folder
-        working-directory: kirby-frontend
+        # TODO: doesn't work for npm ci?
+        # working-directory: kirby-frontend
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -31,19 +32,24 @@ jobs:
 
       # Install dependencies with npm
       - name: Install dependencies
-        run: npm ci
+        run: |
+          pwd
+          npm ci
+        working-directory: ./kirby-frontend
 
       # Build the project and add .nojekyll file to supress default behaviour
       - name: Build
         run: |
+          pwd
           npm run build
           touch ./dist/.nojekyll
+        working-directory: ./kirby-frontend
 
       - name: Deploy to Github Pages 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: gh-pages
-          folder: _dist #the static site folder
+          folder: ./kirby-frontend/_dist #the static site folder
 
       # If you need more privacy / no tracking,
       # sync your site to your own webspace
