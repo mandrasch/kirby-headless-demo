@@ -2,4 +2,10 @@ Title: Home
 
 ----
 
-Text: **Fett**
+Text:
+
+This is just an example site for Kirby CMS with activated (link: https://getkirby.com/plugins/getkirby/kql text: Kirby KQL plugin).
+
+Nothing to see here. I'll might provide example credentials in future.
+
+(link: https://matthias-andrasch.eu/blog/impressum-datenschutz/ text: Impressum & Datenschutz)
