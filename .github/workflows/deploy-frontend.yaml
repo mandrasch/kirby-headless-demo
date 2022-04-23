@@ -9,7 +9,7 @@ on:
     branches:
       - main
     paths:
-      - 'kirby-frontend/**'
+      - 'astro-frontend/**'
 
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
@@ -21,7 +21,7 @@ jobs:
       #run:
         # switch directory always to backend folder
         # TODO: doesn't work for npm ci? https://github.com/actions/runner/issues/1808
-        # working-directory: kirby-frontend
+        # working-directory: astro-frontend
     steps:
 
       - name: Checkout 🛎️
@@ -34,22 +34,22 @@ jobs:
 
       # Debug
       # - name: pwd
-      #  working-directory: kirby-frontend
+      #  working-directory: astro-frontend
       #  run: pwd
 
       # Install dependencies with npm
       - name: Install dependencies
-        # working-directory: kirby-frontend
+        # working-directory: astro-frontend
         run: |
-          cd kirby-frontend/
+          cd astro-frontend/
           npm ci
 
 
       # Build the project and add .nojekyll file to supress default behaviour
       - name: Build
-        # working-directory: kirby-frontend
+        # working-directory: astro-frontend
         run: |
-          cd kirby-frontend/
+          cd astro-frontend/
           pwd
           npm run build
           touch ./dist/.nojekyll
@@ -58,7 +58,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: gh-pages
-          folder: kirby-frontend/_dist #the static site folder
+          folder: astro-frontend/_dist #the static site folder
 
       # If you need more privacy / no tracking,
       # sync your site to your own webspace
