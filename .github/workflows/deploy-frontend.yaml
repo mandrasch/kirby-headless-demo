@@ -17,11 +17,11 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    #defaults:
-      #run:
+    defaults:
+      run:
         # switch directory always to backend folder
-        # TODO: doesn't work for npm ci? https://github.com/actions/runner/issues/1808
-        # working-directory: astro-frontend
+        # TODO: doesn't work for npm ci? or does it? https://github.com/actions/runner/issues/1808
+        working-directory: astro-frontend
     steps:
 
       - name: Checkout 🛎️
@@ -39,9 +39,8 @@ jobs:
 
       # Install dependencies with npm
       - name: Install dependencies
-        # working-directory: astro-frontend
         run: |
-          cd astro-frontend/
+          pwd
           npm ci
 
 
@@ -49,7 +48,6 @@ jobs:
       - name: Build
         # working-directory: astro-frontend
         run: |
-          cd astro-frontend/
           pwd
           npm run build
           touch ./dist/.nojekyll
@@ -58,7 +56,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: gh-pages
-          folder: astro-frontend/_dist #the static site folder
+          folder: dist #the static site folder
 
       # If you need more privacy / no tracking,
       # sync your site to your own webspace
