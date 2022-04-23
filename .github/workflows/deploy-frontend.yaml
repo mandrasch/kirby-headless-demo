@@ -17,8 +17,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
+    #defaults:
+      #run:
         # switch directory always to backend folder
         # TODO: doesn't work for npm ci?
         # working-directory: kirby-frontend
