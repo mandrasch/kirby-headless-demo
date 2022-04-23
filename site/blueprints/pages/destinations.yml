@@ -1,0 +1,26 @@
+# Each page blueprint must have a title, the title may be different from the file name
+title: Notes
+
+# Each page can have an icon that is shown in page listings when no preview image is available.
+icon: 📖
+
+# Define the form layout with two columns
+# More about columns: https://getkirby.com/docs/guide/blueprints/layout#defining-columns
+
+columns:
+  - width: 3/3
+    sections:
+      drafts:
+        headline: Drafts
+        type: pages
+        status: draft
+        templates: destination
+        layout: cards
+
+      published:
+        headline: Published Articles
+        type: pages
+        status: published
+        templates: destination
+        layout: cards
+# More about pages sections: https://getkirby.com/docs/reference/panel/sections/pages
