@@ -18,7 +18,7 @@ jobs:
           args: --optimize-autoloader --no-dev
 
       - name: 📂 Sync files via sftp
-        uses: SamKirkland/FTP-Deploy-Action@4
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
         with:
           local-dir: ./
           server: ${{ secrets.ftp_host }}
