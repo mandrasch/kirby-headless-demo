@@ -1,0 +1,98 @@
+---
+import TourList from '../components/TourList.astro';
+
+const response1 = await fetch('https://jsonplaceholder.typicode.com/users');
+const allUsers = await response1.json();
+
+// TODO: get values from import.meta.env
+// TODO: secure password via pipeline, is it exposed via JS? 
+// TODO: what could be the harm if this is exposed?
+//const api = "https://kirby-kql-astro.ddev.site/api/query";
+const api = import.meta.env.PUBLIC_API_URL; // e.g. https://kirby-kql-astro.ddev.site/api/query
+// api user -> limit it's roles by editing permissions
+const auth = {
+  email: import.meta.env.PUBLIC_API_USER_EMAIL,
+  password: import.meta.env.PUBLIC_API_USER_PASSWORD
+};
+console.log('AUTH:',auth)
+const queryJson = {
+    "query": "page('tours').children",
+    "select": {
+        "url": true,
+        "title": true,
+		"slug":true,
+        "text": "page.text.markdown",
+        "images": {
+            "query": "page.images",
+            "select": {
+                "url": true
+            }
+        }
+    },
+    "pagination": {
+        "limit": 2
+    }
+}
+
+// fetch post with BasicAuth
+const response = await fetch(api, {
+	method: 'POST',
+	// https://observablehq.com/@mbostock/fetch-with-basic-auth
+	headers: {
+    "Authorization": `Basic ${btoa(`${auth.email}:${auth.password}`)}`,
+	"Content-type": "application/json; charset=UTF-8"
+  	},
+	body: JSON.stringify(queryJson)
+}).catch(err => {
+	// those are only parsing errors, network errors see below
+  console.log('ERROR Request failed', err);
+});
+
+// catch network errors (https://stackoverflow.com/questions/52458341/unable-to-catch-403-in-try-catch-during-fetch)
+
+//console.log('KIRBY KQL API RESPONSE:',response);
+if(response.status !== 200){
+	throw new Error(`API returned status code: ${response?.status} ', statusText: ${response?.statusText}.`);
+}
+
+const responseJson = await response.json();
+const tours = responseJson.result.data;
+const toursPaginationData = responseJson.result.pagination;
+// example:
+/*KIRBY KQL API RESPONSE - JSON: {
+  code: 200,
+  result: {
+    data: [ [Object], [Object] ],
+    pagination: { page: 1, pages: 1, offset: 0, limit: 100, total: 2 }
+  },
+  status: 'ok'
+}*/
+console.log('KIRBY KQL API RESPONSE - JSON:',responseJson);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro 123</h1>
+		<ul>
+		<!-- <PostPreview id={post} id={user.id}  /> -->
+		<!-- TODO: link to users/id -->
+		<!-- https://discord.com/channels/830184174198718474/952074477712322610/952220284532957264 -->
+		{
+			allUsers.map((user) =>  { 
+				return (
+					<li><a href={`/user/${user.id}`}>User {user.name}</a></li>
+					)
+				}
+			)
+		}
+		</ul>
+
+		<TourList {tours}></TourList>
+		
+	</body>
+</html>

@@ -1,3 +1,4 @@
+# Only get's triggered when changes in backend folder occur
 name: Build and Deploy Backend
 
 on:
@@ -6,13 +7,14 @@ on:
       - main
     paths:
       - 'kirby-backend/**'
+      # See: https://www.edwardthomson.com/blog/github_actions_10_path_triggers.html
       
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # backend folder
+        # switch directory always to backend folder
         working-directory: kirby-backend
 
     steps:

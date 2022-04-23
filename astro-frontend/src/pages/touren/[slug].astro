@@ -1,0 +1,60 @@
+---
+// https://docs.astro.build/en/reference/api-reference/#getstaticpaths
+// We need to let astro know, which /<slugs>/ really exist
+// e.g.
+/* return [
+    { params: { slug: 'traunsee' } },
+    { params: { id: 'achensee' } },
+    { params: { id:  'another-sea' } }
+  ];
+*/
+
+export async function getStaticPaths() {
+  const api = import.meta.env.PUBLIC_API_URL; 
+  const auth = {
+    email: import.meta.env.PUBLIC_API_USER_EMAIL,
+    password: import.meta.env.PUBLIC_API_USER_PASSWORD
+  };
+  const queryJson = {
+      "query": "page('tours').children",
+      "select": {
+        "slug":true,
+      },
+      "pagination": {
+          "limit": 100 // TODO: this is the max limit of kirby
+      }
+  }
+  // TODO: how to use this with pagination properly?
+  // https://github.com/getkirby/kql#pagination
+
+  // fetch post with BasicAuth
+  const response = await fetch(api, {
+    method: 'POST',
+    // https://observablehq.com/@mbostock/fetch-with-basic-auth
+    headers: {
+      "Authorization": `Basic ${btoa(`${auth.email}:${auth.password}`)}`,
+    "Content-type": "application/json; charset=UTF-8"
+      },
+    body: JSON.stringify(queryJson)
+  })
+
+  if(response.status !== 200){
+    throw new Error(`API returned status code: ${response?.status} ', statusText: ${response?.statusText}.`);
+  }
+  
+  const responseJson = await response.json();
+  console.log('responseJson.result.data',responseJson.result.data);
+  const staticPaths = responseJson.result.data.map((page) => ({ params: { slug: page.slug }}));
+  console.log('static paths',staticPaths);
+  return staticPaths;
+
+}
+
+const { slug } = Astro.params; 
+
+// TODO: load tour by slug
+const tour = {title:'static test '+slug};
+---
+
+
+<h1>{tour.title}</h1>

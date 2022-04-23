@@ -1,0 +1,19 @@
+---
+// https://docs.astro.build/en/guides/typescript/#component-props
+// via https://youtu.be/jkMvQKuDhqU?t=1624
+export interface Props {
+  tours: any, // TODO: what's the correct TS type?
+}
+const { tours } = Astro.props
+console.log('tours',tours);
+---
+
+<ul>
+		{
+			tours.map((tour) =>  { 
+				return (
+					<li><a href={`/touren/${tour.slug}`}>Tour {tour.title}</a></li>
+					)
+				}
+			)
+		}</ul>
