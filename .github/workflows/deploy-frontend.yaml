@@ -3,7 +3,7 @@ env:
   base: /kirby-headless-demo
 
 
-name: Build and Deploy
+name: Build and Deploy Frontend
 on:
   push:
     branches:
