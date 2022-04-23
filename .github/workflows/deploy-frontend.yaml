@@ -20,7 +20,7 @@ jobs:
     #defaults:
       #run:
         # switch directory always to backend folder
-        # TODO: doesn't work for npm ci?
+        # TODO: doesn't work for npm ci? https://github.com/actions/runner/issues/1808
         # working-directory: kirby-frontend
     steps:
 
@@ -32,23 +32,24 @@ jobs:
         with:
           node-version: "16" # lts
 
-      # Install dependencies with npm
-      - name: pwd
-        working-directory: kirby-frontend
-        run: pwd
+      # Debug
+      # - name: pwd
+      #  working-directory: kirby-frontend
+      #  run: pwd
 
       # Install dependencies with npm
       - name: Install dependencies
-        working-directory: kirby-frontend
+        # working-directory: kirby-frontend
         run: |
-          pwd
+          cd kirby-frontend/
           npm ci
 
 
       # Build the project and add .nojekyll file to supress default behaviour
       - name: Build
-        working-directory: kirby-frontend
+        # working-directory: kirby-frontend
         run: |
+          cd kirby-frontend/
           pwd
           npm run build
           touch ./dist/.nojekyll
