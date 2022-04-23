@@ -1,4 +1,4 @@
-name: kirby-plainkit
+name: kirby-headless-demo
 type: php
 docroot: ""
 php_version: "8.0"
