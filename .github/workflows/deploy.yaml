@@ -15,7 +15,8 @@ jobs:
         with:
           php_version: '8.0'
           version: '2'
-          args: --optimize-autoloader --no-dev
+          # missing extension caused error in action
+          args: --optimize-autoloader --no-dev --ignore-platform-req=ext-gd
 
       - name: 📂 Sync files via sftp
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
