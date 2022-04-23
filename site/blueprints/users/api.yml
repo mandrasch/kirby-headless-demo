@@ -1,0 +1,51 @@
+title: Api
+description: Api users, read-only
+permissions:
+  access:
+    panel: true
+    site: false
+    languages: false
+    system: false
+    users: false
+  files:
+    create: false
+    changeName: false
+    delete: false
+    read: false
+    replace: false
+    update: false
+  languages:
+    create: false
+    delete: false
+  pages:
+    changeSlug: false
+    changeStatus: false
+    changeTemplate: false
+    changeTitle: false
+    create: false
+    delete: false
+    duplicate: false
+    preview: false
+    read: true
+    sort: false
+    update: false
+  site:
+    changeTitle: false
+    update: false
+  user:
+    changeEmail: false
+    changeLanguage: false
+    changeName: false
+    changePassword: false
+    changeRole: false
+    delete: false
+    update: false
+  users:
+    changeEmail: false
+    changeLanguage: false
+    changeName: false
+    changePassword: false
+    changeRole: false
+    create: false
+    delete: false
+    update: false
