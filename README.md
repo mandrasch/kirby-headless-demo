@@ -14,3 +14,7 @@ State: Work in progress
 - `ddev start && ddev composer install && ddev launch`
 
 - Astro is currently not bundled within DDEV because Vite needs extra treatment (see e.g. port exposing for laravel-mix https://github.com/tyler36/ddev-browsersync#laravel-mix-example)
+
+## TODOs
+
+- gh action - setting working dir does not work, use on every step or use `cd`?
