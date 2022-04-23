@@ -34,12 +34,12 @@ jobs:
 
       # Install dependencies with npm
       - name: pwd
-        working-directory: ./kirby-frontend
+        working-directory: kirby-frontend
         run: pwd
-        
+
       # Install dependencies with npm
       - name: Install dependencies
-        working-directory: ./kirby-frontend
+        working-directory: kirby-frontend
         run: |
           pwd
           npm ci
@@ -47,7 +47,7 @@ jobs:
 
       # Build the project and add .nojekyll file to supress default behaviour
       - name: Build
-        working-directory: ./kirby-frontend
+        working-directory: kirby-frontend
         run: |
           pwd
           npm run build
@@ -57,7 +57,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
           branch: gh-pages
-          folder: ./kirby-frontend/_dist #the static site folder
+          folder: kirby-frontend/_dist #the static site folder
 
       # If you need more privacy / no tracking,
       # sync your site to your own webspace
