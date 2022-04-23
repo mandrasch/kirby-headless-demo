@@ -1,3 +1,11 @@
+# Kirby Headless Demo (KQL)
+
+After forking, following steps were made:
+
+-   `ddev composer require getkirby/kql`
+-   Content, api user role, etc. create
+
+You need to create a user with api role locally in panel and upload user infos from /site/accounts/ to your deployment instance.
 
 # DDEV Kirby Plainkit
 
@@ -38,7 +46,7 @@ composer create-project getkirby/plainkit install-folder && \
     mv install-folder/README.md install-folder/README_kirby.md && \
     cp -Rp install-folder/. /var/www/html && \
     rm -rf install-folder/
-exit 
+exit
 ddev composer install
 ddev launch
 ```
@@ -49,12 +57,12 @@ Gitpod DDEV integration was done with helpful tips by [@shaal](https://github.co
 
 ## TODOs
 
-- [ ] Add Laravel Mix support (and Bootstrap5? Or use different repo?) - See https://github.com/mandrasch/bahn-zum-see 
+-   [ ] Add Laravel Mix support (and Bootstrap5? Or use different repo?) - See https://github.com/mandrasch/bahn-zum-see
 
 ## Links / Other repos
 
-- https://github.com/mandrasch/ddev-kirby-starterkit
-- https://github.com/mandrasch/bahn-zum-see (example site)
+-   https://github.com/mandrasch/ddev-kirby-starterkit
+-   https://github.com/mandrasch/bahn-zum-see (example site)
 
 ## License
 
