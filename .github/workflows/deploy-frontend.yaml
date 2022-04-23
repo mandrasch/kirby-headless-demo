@@ -33,6 +33,11 @@ jobs:
           node-version: "16" # lts
 
       # Install dependencies with npm
+      - name: pwd
+        working-directory: ./kirby-frontend
+        run: pwd
+        
+      # Install dependencies with npm
       - name: Install dependencies
         working-directory: ./kirby-frontend
         run: |
